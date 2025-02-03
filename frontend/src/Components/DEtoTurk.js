@@ -85,6 +85,10 @@ const DEtoTurk = () => {
   useEffect(()=> {
     bringAllWords()
     splitArr(mywords[0]?.specialPhrase)
+    window.addEventListener("keydown", checkKey, false);
+    return () => {
+      window.removeEventListener("keydown", checkKey, false);
+    };
   
   }, [] )
   if (loading) {

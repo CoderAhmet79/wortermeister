@@ -11,7 +11,7 @@ const Newest = () => {
 
   const bringAllWords = async () => {
     try {
-      const response = await axios.get(process.env.REACT_APP_URI + "/newest");
+      const response = await axios.get(process.env.REACT_APP_URI + "newest");
       const fetchedWords = response?.data;
       setMywords(fetchedWords);
     } catch (error) {
@@ -63,11 +63,22 @@ const Newest = () => {
     setPhrases(Array.isArray(arr) ? arr : []);
   };
 
+  const checkKey = (e) => {
+    if (e.keyCode === 39) { // Right arrow key
+        nextWord();
+    } else if (e.keyCode === 37) { // Left arrow key
+        prevWord();
+    }
+};
 
   useEffect(() => {
     bringAllWords();
     splitArr(mywords[0]?.specialPhrase);
-    console.log(mywords);
+    window.addEventListener("keydown", checkKey, false);
+    return () => {
+      window.removeEventListener("keydown", checkKey, false);
+    };
+    
   }, []);
   if (loading) {
     return <div>Loading...</div>; // Render a loading indicator while fetching data

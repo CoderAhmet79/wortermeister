@@ -71,12 +71,21 @@ const TurktoDE = () => {
     setPhrases(Array.isArray(arr) ? arr : []);
   }
 
-
+  const checkKey = (e) => {
+    if (e.keyCode === 39) { // Right arrow key
+        nextWord();
+    } else if (e.keyCode === 37) { // Left arrow key
+        prevWord();
+    }
+};
 
   useEffect(()=> {
     bringAllWords()
     splitArr(mywords[0]?.specialPhrase)
-  
+    window.addEventListener("keydown", checkKey, false);
+    return () => {
+      window.removeEventListener("keydown", checkKey, false);
+    };
   }, [] )
   if (loading) {
     return <div>Loading...</div>; // Render a loading indicator while fetching data
@@ -110,7 +119,7 @@ return (
     </div>
     
     </div>
-    <div className='row-start-2 h-fit mt-44 mr-8'><button onClick={()=> prevWord()} className='text-2xl p-5 hover:border-none float-right border-slate-950 text-center bg-sky-400 shadow-2xl rounded text-zinc-50 from-neutral-900 font-mono  hover:bg-blue-700' > Prev </button></div>
+    <div className='row-start-2 h-fit mt-44 mr-8'><button onClick={()=> prevWord()} className='text-2xl p-5 hover:border-none float-right border-slate-950 text-center bg-sky-400 shadow-2xl rounded text-zinc-50 from-neutral-900 font-mono  hover:bg-blue-700' > Prev </button></div>&nbsp;<b>{indice+1}</b>
     <div className='row-start-2 h-fit mt-44 ml-8'><button onClick={()=> nextWord()} className='text-2xl p-5 hover:border-none border-slate-950 text-center bg-sky-400 shadow-2xl rounded text-zinc-50 from-neutral-900 font-mono  hover:bg-blue-700' > Next</button></div>
   </div>
 )

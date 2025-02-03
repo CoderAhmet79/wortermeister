@@ -15,7 +15,7 @@ const Navbar = () => {
   let [open, setOpen] = useState(false);
 
   return (
-    <div className="shadow-md w-full top-0 left-0 mb-6 relative">
+    <div className="shadow-md w-full top-0 left-0 mb-2 relative">
       <div className="md:flex items-center justify-between bg-indigo-950 py-4 md:px-10 px-7">
         <div className="font-bold text-2xl cursor-pointer flex items-center font-serif text-slate-50">
           <span className="text-3xl text-red-600 mr-1 pt-2">
