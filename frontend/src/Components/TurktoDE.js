@@ -83,10 +83,10 @@ const TurktoDE = () => {
 } 
 
 return (
-  <div className='w-2/4 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140'>
+  <div className='w-2/4 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140 min-w-[400px]'>
     
-    <div className= {`h-140 w-full grid justify-center col-span-2 rounded-xl ${bgcolor} `}> 
-      <div className="relative h-112 overflow-hidden group  w-180 grid place-items-center">
+    <div className= {`h-140 w-full grid justify-center col-span-2 min-w-[400px] rounded-xl ${bgcolor} `}> 
+      <div className="relative h-112 overflow-hidden group  min-w-[400px] grid place-items-center">
         <img src={mywords[indice].photolink} alt="Image" className="w-auto h-96 rounded-xl
          object-fill place-self-center transition-opacity duration-300 group-hover:opacity-0"/>
         <div className="relative inset-0 flex items-center justify-center text-gray-950 text-lg transition-opacity duration-300 w-full">

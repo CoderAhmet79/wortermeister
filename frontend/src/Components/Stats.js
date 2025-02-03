@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 
 const Stats = () => {
@@ -10,7 +9,7 @@ const Stats = () => {
 
   const bringAllWords = async () => {
     try {
-      const response = await axios.get(process.env.REACT_APP_URI + "stats");
+      const response = await axios.get(process.env.REACT_APP_URI + "/stats");
       const fetchedWords = response?.data;
       setMywords(fetchedWords);
     } catch (error) {

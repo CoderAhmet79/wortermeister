@@ -84,11 +84,11 @@ const Newest = () => {
   }
 
   return (
-    <div className="w-2/4 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140">
+    <div className="w-2/4 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140 min-w-[400px]">
       <div
-        className={`h-140 w-full grid justify-center col-span-2 rounded-xl ${bgcolor}`}
+        className={`h-140 w-full grid justify-center col-span-2 min-w-[400px] rounded-xl ${bgcolor}`}
       >
-        <div className="relative h-112 overflow-hidden group  w-180 grid place-items-center">
+        <div className="relative h-112 overflow-hidden group  min-w-[400px] grid place-items-center">
           <img
             src={mywords[indice]?.photolink}
             alt="Image"
