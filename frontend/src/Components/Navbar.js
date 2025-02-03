@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   let Links = [
-    { name: "De-to-Turk", link: " " },
-    { name: "Turk-to-DE", link: "turk" },
-    { name: "Phrases", link: "phrases" },
-    { name: "Artikel Test", link: "artikeltest" },
-    { name: "Newest Words", link: "newlyadd" },
-    { name: "Add New Word", link: "new" },
-    { name: "Konjugation", link: "konj" },
-    { name: "Stats", link: "stats" },
+    { name: "De-to-Turk", link: "/" },
+    { name: "Turk-to-DE", link: "/turk" },
+    { name: "Phrases", link: "/phrases" },
+    { name: "Artikel Test", link: "/artikeltest" },
+    { name: "Newest Words", link: "/newlyadd" },
+    { name: "Add New Word", link: "/new" },
+    { name: "Konjugation", link: "/konj" },
+    { name: "Stats", link: "/stats" },
   ];
   let [open, setOpen] = useState(false);
 
@@ -33,11 +33,11 @@ const Navbar = () => {
           ></ion-icon>
         </div>
 
-        <ul className={`font-serif mt-4 mb-0 ~text-lg/3xl max-md:bg-blue-600  max-md:mt-1 max-md:font-medium max-md:from-neutral-100  md:flex md:items-start md:pb-0 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-4 transition-all duration-500 ease-in ${open ? "top-15 " : "top-[-490px]"}`}>
+        <ul className={`font-serif mt-4 mb-0 ~text-lg/3xl max-md:bg-blue-600  max-md:mt-1 max-md:font-medium max-md:from-neutral-100  md:flex md:items-start md:pb-0 absolute md:static md:z-auto z-10 left-0 w-full md:w-auto md:pl-0 pl-4 transition-all duration-500 ease-in ${open ? "top-15 " : "top-[-490px]"}`} onClick={() => setOpen(!open)}>
           {Links.map((link) => (
             <li className="md:ml-1 text-xl md:my-0 my-2 mx-2  max-md:border-none pr-2 last:border-r-0 md:text-lg">
               <Link to={link.link} className="text-slate-50 hover:text-red-400 hover:underline duration-500">
-                {link.name}
+               {link.name} 
               </Link>
             </li>
           ))}

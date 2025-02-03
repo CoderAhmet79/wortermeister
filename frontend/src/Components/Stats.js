@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 
 const Stats = () => {
@@ -55,10 +56,11 @@ const Stats = () => {
         </div>
         <div className="ml-8 text-red-900 text-xl font-bold">
           {mywords.lastword[0].word}
+                   
         </div>
         
       </div>
-      
+     
     </div>
   );
 };
