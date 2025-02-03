@@ -12,7 +12,7 @@ const Newest = () => {
 
   const bringAllWords = async () => {
     try {
-      const response = await axios.get(process.env.REACT_APP_URI + "newest");
+      const response = await axios.get(process.env.REACT_APP_URI + "/newest");
       const fetchedWords = response?.data;
       setMywords(fetchedWords);
     } catch (error) {
