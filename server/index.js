@@ -28,7 +28,7 @@ app.use(cors(corsOptions))
 
 app.use('/', router)
 
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 5500
 
 mongoose.set("strictQuery", false)
 mongoose.connect(process.env.DB_URI)

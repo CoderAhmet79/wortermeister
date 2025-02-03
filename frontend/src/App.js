@@ -15,7 +15,7 @@ import Konjugation from './Components/Konjugation';
 
 function App() {
 
-  
+  //asd
 
   return (
 
