@@ -33,7 +33,7 @@ const DEtoTurk = () => {
         } 
         else if (art === "das") 
         {
-          setBgcolor ('bg-emerald-600');
+          setBgcolor ('bg-emerald-500');
         } else {
           setBgcolor ('');
     }
@@ -119,7 +119,7 @@ const DEtoTurk = () => {
       </div>
       
       </div>
-      <div className='row-start-2 h-fit mt-44 mr-8'><button onClick={()=> prevWord()} className='text-2xl p-5 hover:border-none float-right border-slate-950 text-center bg-sky-400 shadow-2xl rounded text-zinc-50 from-neutral-900 font-mono  hover:bg-blue-700' > Prev </button></div>
+      <div className='row-start-2 h-fit mt-44 mr-8'><button onClick={()=> prevWord()} className='text-2xl p-5 hover:border-none float-right border-slate-950 text-center bg-sky-400 shadow-2xl rounded text-zinc-50 from-neutral-900 font-mono  hover:bg-blue-700' > Prev </button></div> &nbsp;<b>{indice+1}</b>
       <div className='row-start-2 h-fit mt-44 ml-8'><button onClick={()=> nextWord()} className='text-2xl p-5 hover:border-none border-slate-950 text-center bg-sky-400 shadow-2xl rounded text-zinc-50 from-neutral-900 font-mono  hover:bg-blue-700' > Next</button></div>
     </div>
   )

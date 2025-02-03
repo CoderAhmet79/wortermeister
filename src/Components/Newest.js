@@ -5,7 +5,7 @@ import axios from "axios";
 const Newest = () => {
   const [mywords, setMywords] = useState([{}]);
   const [indice, setIndice] = useState(0);
-  const [bgcolor, setBgcolor] = useState();
+  const [bgcolor, setBgcolor] = useState('');
   const [phrases, setPhrases] = useState([]);
   const [wordMean, setWordMean] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -130,6 +130,7 @@ const Newest = () => {
           Prev{" "}
         </button>
       </div>
+      &nbsp;<b>{indice+1}</b>
       <div className="row-start-2 h-fit mt-44 ml-8">
         <button
           onClick={() => nextWord()}
