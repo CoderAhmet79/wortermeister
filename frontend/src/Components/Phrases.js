@@ -9,7 +9,7 @@ const Phrases = () => {
 
   const bringAllWords = async ()=> {
     try { 
-      const response = await axios.get(process.env.REACT_APP_URI+"phrases");
+      const response = await axios.get(process.env.REACT_APP_URI+"/phrases");
         const fetchedPhrases = response?.data; 
               
         setMywords(fetchedPhrases);
