@@ -7,7 +7,6 @@ const Newest = () => {
   const [indice, setIndice] = useState(0);
   const [bgcolor, setBgcolor] = useState('');
   const [phrases, setPhrases] = useState([]);
-  const [wordMean, setWordMean] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const bringAllWords = async () => {
@@ -64,15 +63,6 @@ const Newest = () => {
     setPhrases(Array.isArray(arr) ? arr : []);
   };
 
-  const checkKey = (e) => {
-    if (e.keyCode === 39) {
-      // Right arrow key
-      nextWord();
-    } else if (e.keyCode === 37) {
-      // Left arrow key
-      prevWord();
-    }
-  };
 
   useEffect(() => {
     bringAllWords();
