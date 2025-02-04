@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   let Links = [
-    { name: "De-to-Turk", link: "/" },
-    { name: "Turk-to-DE", link: "/turk" },
+    { name: "De-Turk", link: "/" },
+    { name: "Turk-DE", link: "/turk" },
     { name: "Phrases", link: "/phrases" },
-    { name: "Artikel Test", link: "/artikeltest" },
+  //  { name: "Artikel Test", link: "/artikeltest" },
     { name: "Newest Words", link: "/newlyadd" },
     { name: "Add New Word", link: "/new" },
     { name: "Konjugation", link: "/konj" },

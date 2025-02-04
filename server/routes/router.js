@@ -83,6 +83,25 @@ router.get('/phrases', async (req, res) => {
 })
 
 
+
+router.post('/wordexists', async (req, res) => {
+    const { word } = req.body;
+console.log(word)
+    try {
+        const foundWord = await worterbuch.findOne({ word });
+
+        if (foundWord) {
+            return res.json({ exists: true, message: `${word} already exists in the database.` });
+        } else {
+            return res.json({ exists: false, message: `${word} does not exist in the database.` });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Server error' });
+    }
+});
+  
+
 let fetchedWords = new Set();
 router.get('/artest', async (req, res) => {
 
