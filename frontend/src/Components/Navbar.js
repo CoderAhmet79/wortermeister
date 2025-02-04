@@ -14,6 +14,26 @@ const Navbar = () => {
   ];
   let [open, setOpen] = useState(false);
 
+  if (isMobileDevice()) {
+    Links = Links.filter(link => link.link !== "/new");
+} else {
+    console.log("User is not on a mobile device.");
+}
+
+  function isMobileDevice() {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    // Check for mobile devices
+    if (/android/i.test(userAgent) || 
+        /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream || 
+        /windows phone/i.test(userAgent) || 
+        /mobile/i.test(userAgent)) {
+        return true; // It's a mobile device
+    }
+
+    return false; // Not a mobile device
+}
+
   return (
     <div className="shadow-md w-full top-0 left-0 mb-2 relative">
       <div className="md:flex items-center justify-between bg-indigo-950 py-4 md:px-10 px-7">
