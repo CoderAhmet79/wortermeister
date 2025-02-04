@@ -9,7 +9,6 @@ const Konjugation = () => {
   const bringVerbenConjugation = async (e) => {
     e.preventDefault()
     try {
-
       setLoading(true)
       const response = await axios.get("https://german-verbs.glitch.me/german-verbs-api?verb=" + dasVerb);
       const fetchedWords = response?.data;

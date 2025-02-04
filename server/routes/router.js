@@ -86,7 +86,7 @@ router.get('/phrases', async (req, res) => {
 
 router.post('/wordexists', async (req, res) => {
     const { word } = req.body;
-console.log(word)
+
     try {
         const foundWord = await worterbuch.findOne({ word });
 

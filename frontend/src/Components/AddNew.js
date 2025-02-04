@@ -94,6 +94,7 @@ const AddNew = () => {
   if(formData.kelime.length > 1) {
   try {
     setLoading(true)
+    kelimeInputRef.current.focus();
     const response = await fetch(process.env.REACT_APP_URI+'wordexists', {
       method: 'POST',
       headers: {
