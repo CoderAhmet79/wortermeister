@@ -80,8 +80,7 @@ const AddNew = () => {
        
       }
     
-      const apiUrl = process.env.REACT_APP_URI + "newword";
-     console.log("API URL:", apiUrl);
+  
 
     try {
         const response= await axios.post(process.env.REACT_APP_URI + "newword", formData);
@@ -93,10 +92,16 @@ const AddNew = () => {
         alert("An error occured. Please try again later")
         return
             }
+      try {
+        await axios.post(process.env.REACT_APP_URI + "newword", formData);
+        
+      } catch (error) {
+        console.error("Error saving data:", error);
+      }
       setFormData(initialFormData)
       setErrors(initialErrors)
   }
- 
+ ///
  const isWordExists=async () => {
   if(formData.kelime.length > 1) {
     try {
@@ -111,7 +116,7 @@ const AddNew = () => {
   });
 
   const result = await response.json();
-  
+
   setLoading(false)
 
     if(result?.exists === true)
