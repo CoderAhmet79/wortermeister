@@ -73,7 +73,7 @@ const AddNew = () => {
       }
     
       try {
-        await axios.post(process.env.REACT_APP_URI + "/newword", formData);
+        await axios.post(process.env.REACT_APP_URI + "newword", formData);
         
       } catch (error) {
         console.error("Error saving data:", error);
