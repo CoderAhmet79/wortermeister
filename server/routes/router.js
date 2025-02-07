@@ -2,15 +2,7 @@ const express = require("express")
 const router = express.Router()
 const worterbuch = require('../models/wordModel');
 const worterPhrase = require('../models/phraseModel');
-const cors= require('cors');
 
-
-const corsOptions = {
-    origin: process.env.REACT_APP_URI, // Allow your frontend origin (e.g., React app)
-    credentials: true, // Allow sending credentials (cookies, HTTP authentication)
-  };
-
-router.use(cors(corsOptions));
 
 router.get('/', async (req, res) => {
   try {
@@ -160,8 +152,8 @@ router.post('/newword', async (req, res) => {
   try {
 
       await wmodel.save();
-      //res.status(200).json({ message: 'A new Word inserted successfully' });
-      res.redirect('new')
+      res.status(200).json({ message: 'A new word inserted successfully' });
+      //res.redirect('new')
 
   } catch (error) {
       console.error('Error inserting the element:', error);
