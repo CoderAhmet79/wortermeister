@@ -101,7 +101,7 @@ const AddNew = () => {
       setFormData(initialFormData)
       setErrors(initialErrors)
   }
- ///
+ 
  const isWordExists=async () => {
   if(formData.kelime.length > 1) {
     try {
