@@ -2,6 +2,15 @@ const express = require("express")
 const router = express.Router()
 const worterbuch = require('../models/wordModel');
 const worterPhrase = require('../models/phraseModel');
+const cors= require('cors');
+
+
+const corsOptions = {
+    origin: process.env.REACT_APP_URI, // Allow your frontend origin (e.g., React app)
+    credentials: true, // Allow sending credentials (cookies, HTTP authentication)
+  };
+
+router.use(cors(corsOptions));
 
 router.get('/', async (req, res) => {
   try {
@@ -101,6 +110,18 @@ router.post('/wordexists', async (req, res) => {
     }
 });
   
+
+router.post("/tracks", async (req, res) => {
+    console.log("data: "+req.body)
+    try {
+        console.log("data: "+req.body)
+    //   const visit = new Visit(req.body);
+    //   await visit.save();
+    //   res.status(201).send("Time tracked successfully!");
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  });
 
 let fetchedWords = new Set();
 router.get('/artest', async (req, res) => {

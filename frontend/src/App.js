@@ -9,19 +9,21 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import AddNew from './Components/AddNew';
 import Stats from './Components/Stats'
 import Konjugation from './Components/Konjugation';
+import UsePageTimer from "./Hooks/UsePageTimer";
 
 
 
 
 function App() {
 
-  //asd
+  
 
   return (
 
     <div className='flex flex-col justify-items-center drop-shadow-l h-svh m-0 p-0 min-w-fit'>
    
       <BrowserRouter>
+      <UsePageTimer />
         <Navbar/>
           <Routes>
             <Route exact path="/" element={<DEtoTurk/>}></Route>

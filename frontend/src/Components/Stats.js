@@ -9,10 +9,10 @@ const Stats = () => {
 
   const bringAllWords = async () => {
     try {
-      const response = await axios.get(process.env.REACT_APP_URI + '/stats');
+      const response = await axios.get(process.env.REACT_APP_URI + 'stats');
       const fetchedWords = response?.data;
       setMywords(fetchedWords);
-      console.log('aaa :'+fetchedWords)
+      
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
