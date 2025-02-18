@@ -50,7 +50,7 @@ const DEtoTurk = () => {
     } )
     artikelBg(mywords[indice + 1]?.artikel)
     splitArr(mywords[indice + 1]?.specialPhrase)
-    
+    document.title = mywords[indice + 1]?.word + " --> web dictionary by Ahmet Tombak- an amator work"
   }
 
   const prevWord = ()=> {
@@ -64,7 +64,7 @@ const DEtoTurk = () => {
    
     artikelBg(mywords[indice - 1]?.artikel);
     splitArr(mywords[indice - 1]?.specialPhrase)
-    
+    document.title = mywords[indice - 1]?.word + " --> web dictionary by Ahmet Tombak- an amator work"
   }
 
 

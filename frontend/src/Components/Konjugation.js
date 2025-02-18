@@ -21,7 +21,7 @@ const Konjugation = () => {
       setLoading(false); // Set loading to false after fetching is done
     }
   }
-
+  document.title = 'Wortermesiter verb Conjugation';
   const handleChange = (e) => {
     const value = e.target.value.replace(/[^A-Za-zäöüßÄÖÜ]/g, '');
     setDasVerb(value);

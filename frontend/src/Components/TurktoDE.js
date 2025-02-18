@@ -48,7 +48,7 @@ const TurktoDE = () => {
     } )
     artikelBg(mywords[indice + 1]?.artikel)
     splitArr(mywords[indice + 1]?.specialPhrase)
-    
+     document.title = mywords[indice + 1]?.turkish + " --> web dictionary by Ahmet Tombak- an amator work"
   }
 
   const prevWord = ()=> {
@@ -62,7 +62,7 @@ const TurktoDE = () => {
    
     artikelBg(mywords[indice - 1]?.artikel);
     splitArr(mywords[indice - 1]?.specialPhrase)
-    
+     document.title = mywords[indice - 1]?.turkish + " --> web dictionary by Ahmet Tombak- an amator work"
   }
 
 
