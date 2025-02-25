@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from 'axios'
+import DeutschComp from './DeutschComp';
 
 
 
@@ -26,10 +27,10 @@ const DEtoTurk = () => {
  
   const artikelBg = (art) => {
     if (art === "der") {
-      setBgcolor ('bg-sky-600');
+      setBgcolor ('bg-sky-500');
       } else if (art === "die") 
         {
-      setBgcolor ('bg-red-600');
+      setBgcolor ('bg-red-500');
         } 
         else if (art === "das") 
         {
@@ -99,29 +100,7 @@ const DEtoTurk = () => {
     <div className='w-2/4 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140 min-w-[400px]'>
       
       <div className= {`h-140 w-full grid justify-center col-span-2 min-w-[400px] rounded-xl ${bgcolor} `}> 
-        <div className="relative h-112 overflow-hidden group  min-w-[400px] grid place-items-center ">
-          <img src={mywords[indice].photolink} alt="Image" className="w-auto h-96 rounded-xl
-           object-fill place-self-center transition-opacity duration-300 group-hover:opacity-0 "
-           />
-          <div className="relative inset-0 flex items-center justify-center text-gray-950 text-lg transition-opacity duration-300 w-full">
-            <ul>
-              <li className='text-slate-800 font-bold text-xl block text-center relative'>{ mywords[indice]?.artikel  }  { mywords[indice].word}</li>
-              <li className='text-slate-800 font-bold text-xl block text-center relative'>{mywords[indice]?.plural && 'die'}  {mywords[indice].plural}</li>
-            </ul>
-            
-          </div>
-          <div className="absolute w-full inset-0 flex items-center justify-center text-slate-800 text-lg 
-          opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <ul>
-              <li className='text-slate-800 font-bold text-xl block text-center relative'>{mywords[indice].turkish }</li>
-              {
-              Array.isArray(phrases) && phrases.length > 0 ? phrases.map( item=>  <li className='text-pink-950 font-bold text-xl block text-center relative'> {item} </li>) : ''
-              } 
-            </ul>
-                                    
-          </div>
-      </div>
-      
+      <DeutschComp mywords={mywords[indice]} phrases={phrases} bgcolor={bgcolor} />     
       </div>
       
       <div className='row-start-2 h-fit mt-44 mr-8'><button onClick={()=> prevWord()} className='text-2xl p-5 hover:border-none float-right border-slate-950 text-center bg-sky-400 shadow-2xl rounded text-zinc-50 from-neutral-900 font-mono  hover:bg-blue-700' > Prev </button></div> &nbsp;<b>{indice+1}</b>
