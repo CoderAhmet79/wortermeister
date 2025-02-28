@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import Loading from "../Utils/Loading";
 
 
 const Stats = () => {
@@ -24,7 +25,7 @@ const Stats = () => {
     bringAllWords();
   }, []);
   if (loading) {
-    return <div className="grid place-content-center">Loading...</div>; // Render a loading indicator while fetching data
+    return <Loading/>; // Render a loading indicator while fetching data
   }
 
   return (

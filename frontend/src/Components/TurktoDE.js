@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
+import Loading from '../Utils/Loading'
 
 
 const TurktoDE = () => {
@@ -88,7 +89,7 @@ const TurktoDE = () => {
     };
   }, [] )
   if (loading) {
-    return <div>Loading...</div>; // Render a loading indicator while fetching data
+    return <Loading/> ; // Render a loading indicator while fetching data
 } 
 
 return (

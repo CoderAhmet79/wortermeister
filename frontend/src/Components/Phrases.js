@@ -1,6 +1,7 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from 'axios'
+import Loading from '../Utils/Loading';
 
 const Phrases = () => {
   const [mywords, setMywords] = useState([{}])
@@ -62,7 +63,7 @@ const Phrases = () => {
   }, [] )
 
   if (loading) {
-    return <div>Loading...</div>; // Render a loading indicator while fetching data
+    return <Loading/>; // Render a loading indicator while fetching data
 } 
 
   return (

@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from 'axios'
 import DeutschComp from './DeutschComp';
+import Loading from '../Utils/Loading';
 
 
 
@@ -93,7 +94,7 @@ const DEtoTurk = () => {
   
   }, [] )
   if (loading) {
-    return <div>Loading...</div>; // Render a loading indicator while fetching data
+    return <Loading/> // Render a loading indicator while fetching data
 } 
 
   return (
