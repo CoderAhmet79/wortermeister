@@ -9,3 +9,4 @@
 - **One-language**: Learn vocabulary of German languages and Turkish meanings with ease.
 - **User-friendly Interface**: An intuitive design that makes learning enjoyable and accessible.
 - Users can add new words and contribute to my project
+please send your comments to: tahmet79@gmail.com 
