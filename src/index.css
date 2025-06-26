@@ -15,6 +15,6 @@ ion-icon {
     @apply text-slate-800  mt-2 max-sm:text-sm ;
   }
   .verb-span {
-    @apply text-xl text-red-700 pl-2 max-sm:text-sm;
+    @apply text-xl text-red-700 max-sm:text-sm;
   }
 }

@@ -1,5 +1,7 @@
 import axios from 'axios';
 import React, { useState, useRef } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddNew = () => {
 
@@ -35,7 +37,18 @@ const AddNew = () => {
   const [formData, setFormData] = useState(initialFormData)
   const [loading, setLoading] = useState(false);
 
-
+  const notify = () => {
+    toast.success("Success! Word saved successfully!", {
+      position: "top-center",
+      autoClose: 1000, // Auto close after 3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+  document.title = "Add new word my dictionary. Danke schön";
   const handleSubmit = async(e) => {
     e.preventDefault()
  
@@ -81,23 +94,18 @@ const AddNew = () => {
       }
     
   
-
+  
     try {
         const response= await axios.post(process.env.REACT_APP_URI + "newword", formData);
-        alert(response?.data?.message)
-        } 
-        catch (error) 
-            {
+        notify(response?.data?.message)
+      } 
+      catch (error) 
+      {
         console.error("Error saving dataxx:", error);
         alert("An error occured. Please try again later")
         return
-            }
-      try {
-        await axios.post(process.env.REACT_APP_URI + "newword", formData);
-        
-      } catch (error) {
-        console.error("Error saving data:", error);
       }
+      
       setFormData(initialFormData)
       setErrors(initialErrors)
   }
@@ -125,7 +133,7 @@ const AddNew = () => {
         ...prevErrors,
         kelime: (
           <>
-            <strong> {formData.kelime} </strong>kelimesi zaten kayıtlı. Bu kelimeyi değiştirmelisiniz.
+            <strong className='text-sky-600'> {formData.kelime} </strong>kelimesi zaten kayıtlı. Bu kelimeyi değiştirmelisiniz.
           </>
       ),
   
@@ -161,16 +169,42 @@ catch (error) {
     setFocusedField(fieldName); // Update the state with the name of the focused field
   };
  
+  // const addSpecialChars = (specialChar) => {
+  //   if (focusedField) {
+  //     setFormData((prevValues) => ({
+  //       ...prevValues,
+  //       [focusedField]: prevValues[focusedField] + specialChar, // Append the special character to the focused field
+  //     }));
+  //     turkceInputRef.current.focus();
+  //   }
+
+  // }
   const addSpecialChars = (specialChar) => {
     if (focusedField) {
-      setFormData((prevValues) => ({
-        ...prevValues,
-        [focusedField]: prevValues[focusedField] + specialChar, // Append the special character to the focused field
-      }));
-      turkceInputRef.current.focus();
+      setFormData((prevValues) => {
+        const currentText = prevValues[focusedField];
+        const inputElement = document.querySelector(`#${focusedField}`); // Assuming the input has an ID matching the field name
+        if (inputElement) {
+          const cursorPosition = inputElement.selectionStart;
+          // Insert the special character at the cursor position
+          const newText =
+            currentText.slice(0, cursorPosition) +
+            specialChar +
+            currentText.slice(cursorPosition);
+          // Update the form data with the new text
+          return {
+            ...prevValues,
+            [focusedField]: newText,
+          };
+        }
+        return prevValues; // Return previous values if inputElement is not found
+      });
+      // Refocus the input field
+      if (turkceInputRef.current) {
+        turkceInputRef.current.focus();
+      }
     }
-
-  }
+  };
 
   return (
     <div className='w-3/4 flex justify-center place-self-center min-h-96 flex-row max-md:flex-col max-sm:w-100 max-sm:border-none'>
@@ -196,7 +230,7 @@ catch (error) {
               placeholder='Kelimeyi girin....'
               onChange={handleChange}
               ref={kelimeInputRef}
-              className='h-8 p-2 border-2 rounded-md focus:bg-slate-200 font-serif'
+              className='h-8 border-2 rounded-md focus:bg-slate-200 font-serif'
               value={formData.kelime}
               onBlur={isWordExists}
             /> 
@@ -237,7 +271,7 @@ catch (error) {
             <input type="text" name="turkce"
               id="turkce"
               placeholder='Türkçe anlamını girin....'
-              className='h-8 w-96 p-2 rounded-md focus:bg-slate-200 font-serif border-2'
+              className='h-8 w-96 rounded-md focus:bg-slate-200 font-serif border-2'
               onChange={handleChange}
               value={formData.turkce}
               ref={turkceInputRef}
@@ -275,10 +309,11 @@ catch (error) {
       </div>
       <div className='w-2/4 grid border-2 rounded-lg border-red-200 text-center place-items-center'>
         <figure>
-          <img src={formData.fotoLink} alt="Picture for german word" className='w-80 h-auto'/>
+          <img src={formData.fotoLink} alt="Photo for german word" className='w-80 h-auto'/>
           <figcaption>Sample figure for <b>{formData.kelime}</b> </figcaption>
         </figure>
       </div>
+      <ToastContainer />
     </div>
   )
 }

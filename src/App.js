@@ -9,29 +9,33 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import AddNew from './Components/AddNew';
 import Stats from './Components/Stats'
 import Konjugation from './Components/Konjugation';
+import UsePageTimer from "./Hooks/UsePageTimer";
+import NotFound from './Components/NotFound';
 
 
 
 
 function App() {
 
-  //asd
+  
 
   return (
 
-    <div className='flex flex-col justify-items-center drop-shadow-l h-svh m-0 p-0 min-w-fit'>
+    <div className='flex flex-col justify-items-center drop-shadow-l h-svh m-0 p-0 min-w-fit relative'>
    
       <BrowserRouter>
+      <UsePageTimer />
         <Navbar/>
           <Routes>
-            <Route exact path="/" element={<DEtoTurk/>}></Route>
-            <Route exact path="/turk" element={<TurktoDE/>}></Route>
+            <Route exact path="/" element={<DEtoTurk/>} />
+            <Route exact path="/turk" element={<TurktoDE/>} />
             <Route exact path="/newlyadd" element={<Newest/>}/>
             <Route exact path="/phrases" element={<Phrases/>} />
-            <Route exact path="/artikeltest" element={<ArtikelTest/>}></Route>   
-            <Route exact path="/new" element={<AddNew/>}></Route>
-            <Route exact path="/konj" element={<Konjugation/>}></Route> 
-            <Route exact path="/stats" element={<Stats/>}></Route>     
+            <Route exact path="/artikeltest" element={<ArtikelTest/>} />  
+            <Route exact path="/new" element={<AddNew/>} />
+            <Route exact path="/konj" element={<Konjugation/>} />
+            <Route exact path="/stats" element={<Stats/>} />
+            <Route exact path="*" element={<NotFound />} />    
           </Routes>     
       </BrowserRouter>
       <Footer /> 

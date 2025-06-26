@@ -20,7 +20,8 @@ module.exports = {
         '180': '45rem',
         '200': '50rem',
         '360': '90rem',
-      }
+      },
+      
     },
   },
   plugins: [],
