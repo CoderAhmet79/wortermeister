@@ -4,34 +4,46 @@ import axios from 'axios'
 import Loading from '../Utils/Loading';
 
 const Phrases = () => {
-  const [mywords, setMywords] = useState([{}])
+  const [phrase, setPhrase] = useState([{}])
   const [indice, setIndice] = useState(0)
   const [loading, setLoading] = useState(true);
+  const [times, setTimes]= useState()
 
-  const bringAllWords = async ()=> {
-    try { 
-      const response = await axios.get(process.env.REACT_APP_URI+"phrases");
-        const fetchedPhrases = response?.data;       
-        setMywords(fetchedPhrases);
-        } 
-        catch (error) {
-          console.error('Error fetching data:', error);
-        } finally {
-          setLoading(false); // Set loading to false after fetching is done
-      }
-  }
+const handleSubmit = async (event) => {
+    event.preventDefault(); // Sayfanın yenilenmesini engeller
+     setIndice(0)
+    // Formdan değerleri al
+    const level = document.getElementById("level").value;
+    const timesValue = document.getElementById("times").value;
+    setTimes(timesValue)
+
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_URI}phrases`, {
+        params: {
+          level: level,
+          limit: timesValue
+        }
+      });
+
+      // Gelen veriyi state'e ata veya başka bir işlem yap
+      setPhrase(response.data);
+      console.log(response.data)
+    } catch (error) {
+      console.error("Veri getirme hatası:", error);
+    }
+  };
  
  
   const nextWord = ()=> {
    
     setIndice(prev =>  {
-      if (prev > 148) {
+      if (prev > times-2) {
         return 0; // Decrement if greater than 0
     } else {
         return prev + 1; // Set to 149 if it would go below 0
     }
     } )
-    
+   
   }
 
   const prevWord = ()=> {
@@ -39,7 +51,7 @@ const Phrases = () => {
       if (prev > 0) {
         return prev - 1; // Decrement if greater than 0
     } else {
-        return 149; // Set to 149 if it would go below 0
+        return times-1; // Set to 149 if it would go below 0
     }
     } )
    
@@ -55,7 +67,6 @@ const Phrases = () => {
 
 
   useEffect(()=> {
-    bringAllWords()
     window.addEventListener("keydown", checkKey, false);
     return () => {
       window.removeEventListener("keydown", checkKey, false);
@@ -63,19 +74,46 @@ const Phrases = () => {
   }, [] )
 
   if (loading) {
-    return <Loading/>; // Render a loading indicator while fetching data
+ times    //return <Loading/>; // Render a loading indicator while fetching data
 } 
 
   return (
     <div className='w-2/4 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140'>
       
-      <div className= {`h-140 w-full grid justify-center border border-solid border-y-slate-400 col-span-2 rounded-xl `}> 
-            <ul className='border border-slate-200 m-2 rounded h-7'>
-              <li className='text-slate-800 font-bold text-xl block text-center relative mb-8 bg-blue-100'> { mywords[indice]?._id}</li>
-              {
-              Array.isArray(mywords[indice]?.phrases) && mywords[indice]?.phrases.length > 0 ? mywords[indice]?.phrases.map( item=>  <li className='text-pink-950 font-bold text-xl block relative'> -{item} </li>) : ''
-              } 
-            </ul>
+      <div className= {`h-140 w-full gap-2 border border-solid border-y-slate-400 col-span-2 rounded-xl p-2`}> 
+        <div className='flex flex-col border-b-2 h-12 justify-evenly items-center align-middle'>
+          <form onSubmit={handleSubmit} className='flex flex-row gap-4 font-serif'>
+            <div className='h-full w-fit flex items-center'>
+            <label htmlFor="level" className='mr-4'>Choose level:</label>
+          <select name="level" id="level" className='bg-slate-100 border-2 border-slate-300 rounded p-1'>
+            <option value="A1">A1</option>
+            <option value="A2">A2</option>
+            <option value="B1">B1</option>
+            <option value="B2">B2</option>
+            <option value="AT-Dialect">Dialect</option>
+          </select>
+        </div>
+        <div className='w-fit h-full flex items-center'>
+          <label htmlFor="level" className='mr-4'>Choose practice #:</label>
+          <select name="times" id="times" className='bg-slate-100 border-2 border-slate-300 rounded p-1'>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+          </div>
+       <input type="submit" value="Bring daily phrases" 
+       className=' rounded bg-sky-400 text-zinc-50 p-2 cursor-pointer hover:border-none hover:bg-blue-700' />
+        </form>
+        </div>
+        <div className='w-full h-full flex justify-center items-start pt-4 text-2xl font-serif'>
+           <ul>
+            <li className='text-center' key={phrase?._id }><strong>{phrase[indice]?.phraseDeutsch}</strong></li>
+            <li className='text-center mt-4'>{ phrase[indice]?.phraseTurkish}</li>
+            <li className='text-lg text-red-500 text-center '>{phrase[indice]?.level}</li>
+             <li className='text-center'>{indice+1}</li>
+           </ul>
+        </div>
 
       </div>
       <div className='row-start-2 h-fit mt-44 mr-8'><button onClick={()=> prevWord()} className='text-2xl p-5 hover:border-none float-right border-slate-950 text-center bg-sky-400 shadow-2xl rounded text-zinc-50 from-neutral-900 font-mono  hover:bg-blue-700' > Prev </button></div>

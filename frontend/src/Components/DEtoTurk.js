@@ -98,7 +98,7 @@ const DEtoTurk = () => {
 } 
 
   return (
-    <div className='w-2/4 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140 min-w-[400px]'>
+    <div className='w-2/4 place-self-center grid grid-cols-2 grid-rows-2 gap-1 min-w-[400px] h-140 relative'>
       
       <div className= {`h-140 w-full grid justify-center col-span-2 min-w-[400px] rounded-xl ${bgcolor} `}> 
       <DeutschComp mywords={mywords[indice]} phrases={phrases} bgcolor={bgcolor} />     

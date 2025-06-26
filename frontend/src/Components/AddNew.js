@@ -169,16 +169,42 @@ catch (error) {
     setFocusedField(fieldName); // Update the state with the name of the focused field
   };
  
+  // const addSpecialChars = (specialChar) => {
+  //   if (focusedField) {
+  //     setFormData((prevValues) => ({
+  //       ...prevValues,
+  //       [focusedField]: prevValues[focusedField] + specialChar, // Append the special character to the focused field
+  //     }));
+  //     turkceInputRef.current.focus();
+  //   }
+
+  // }
   const addSpecialChars = (specialChar) => {
     if (focusedField) {
-      setFormData((prevValues) => ({
-        ...prevValues,
-        [focusedField]: prevValues[focusedField] + specialChar, // Append the special character to the focused field
-      }));
-      turkceInputRef.current.focus();
+      setFormData((prevValues) => {
+        const currentText = prevValues[focusedField];
+        const inputElement = document.querySelector(`#${focusedField}`); // Assuming the input has an ID matching the field name
+        if (inputElement) {
+          const cursorPosition = inputElement.selectionStart;
+          // Insert the special character at the cursor position
+          const newText =
+            currentText.slice(0, cursorPosition) +
+            specialChar +
+            currentText.slice(cursorPosition);
+          // Update the form data with the new text
+          return {
+            ...prevValues,
+            [focusedField]: newText,
+          };
+        }
+        return prevValues; // Return previous values if inputElement is not found
+      });
+      // Refocus the input field
+      if (turkceInputRef.current) {
+        turkceInputRef.current.focus();
+      }
     }
-
-  }
+  };
 
   return (
     <div className='w-3/4 flex justify-center place-self-center min-h-96 flex-row max-md:flex-col max-sm:w-100 max-sm:border-none'>

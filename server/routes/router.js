@@ -2,6 +2,8 @@ const express = require("express")
 const router = express.Router()
 const worterbuch = require('../models/wordModel');
 const worterPhrase = require('../models/phraseModel');
+const Visitor = require('../models/Visitor');
+
 
 
 router.get('/', async (req, res) => {
@@ -60,30 +62,89 @@ router.get('/newest', async (req, res) => {
 })
 
 
+// router.get('/phrases', async (req, res) => {
+//   try {
+//       const agg = [
+//           {
+//               '$group': {
+//                   '_id': '$phraseWord',
+//                   'phrases': {
+//                       '$addToSet': '$phrasePhrase'
+//                   },
+//               }
+//           }, { $sample: { size: 150 } } // Fetch 150 random records
+//                     ];
+
+//       const words = await worterPhrase.aggregate(agg) //Last saved 150 records
+//       res.status(200).json(words);
+
+//   } catch (error) {
+//       console.error('Error fetching users:', error);
+//       res.status(500).send('Internal server error');
+//   }
+
+// })
+
 router.get('/phrases', async (req, res) => {
   try {
-      const agg = [
-          {
-              '$group': {
-                  '_id': '$phraseWord',
-                  'phrases': {
-                      '$addToSet': '$phrasePhrase'
-                  },
-              }
-          }, { $sample: { size: 150 } } // Fetch 150 random records
-                    ];
+    const level = req.query.level;
+    const limit = parseInt(req.query.limit);
+console.log(level, limit)
+    const agg = [
+      {
+        $match: { level: level } // Belirtilen seviyeye göre filtrele
+      },
+      {
+        $group: {
+          _id: "$phraseDeutsch", // Aynı Almanca cümleleri grupla
+          phraseDeutsch: { $first: "$phraseDeutsch" }, // Ekstra olarak kaydet
+          phraseTurkish: { $first: "$phraseTurkish" },
+          level: { $first: "$level" },
+          docId: { $first: "$_id" } // Gerçek ID’yi ayrıca kaydet
+        }
+      },
+      {
+        $sample: { size: limit } // limit kadar rastgele farklı kayıt al
+      },
+      {
+        $project: {
+          _id: "$docId", // MongoDB orijinal ID
+          phraseDeutsch: 1,
+          phraseTurkish: 1,
+          level: 1
+        }
+      }
+    ];
 
-      const words = await worterPhrase.aggregate(agg) //Last saved 150 records
-      res.status(200).json(words);
+    const phrases = await worterPhrase.aggregate(agg);
+    res.status(200).json(phrases);
+  } catch (error) {
+    console.error("Error fetching phrases:", error);
+    res.status(500).send("Internal server error");
+  }
+});
+
+
+
+router.post("/addphrase", async (req, res) => {
+  try {
+    const data = req.body;
+
+    // Eğer gelen veri bir dizi ise toplu ekleme
+    if (Array.isArray(data)) {
+      const savedPhrases = await worterPhrase.insertMany(data);
+      return res.status(201).json({ message: "Cümleler eklendi", data: savedPhrases });
+    }
+
+    // Tek bir cümle ise
+    const phrase = new worterPhrase(data);
+    const savedPhrase = await phrase.save();
+    res.status(201).json({ message: "Cümle eklendi", data: savedPhrase });
 
   } catch (error) {
-      console.error('Error fetching users:', error);
-      res.status(500).send('Internal server error');
+    res.status(500).json({ message: "Veri eklenirken hata oluştu", error });
   }
-
-})
-
-
+});
 
 router.post('/wordexists', async (req, res) => {
     const { word } = req.body;
@@ -161,4 +222,22 @@ router.post('/newword', async (req, res) => {
   }
 
 })
+router.post('/visitors', async (req, res) => {
+  try {
+    const ip =
+      req.headers['x-forwarded-for']?.split(',').shift() ||
+      req.socket?.remoteAddress;
+
+    const visitor = new Visitor({
+      ...req.body,
+      ip,
+    });
+
+    await visitor.save();
+    res.status(201).json({ message: 'Visitor logged' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to log visitor' });
+  }
+});
+
 module.exports = router

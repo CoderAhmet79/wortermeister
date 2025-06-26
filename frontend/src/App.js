@@ -21,7 +21,7 @@ function App() {
 
   return (
 
-    <div className='flex flex-col justify-items-center drop-shadow-l h-svh m-0 p-0 min-w-fit'>
+    <div className='flex flex-col justify-items-center drop-shadow-l h-svh m-0 p-0 min-w-fit relative'>
    
       <BrowserRouter>
       <UsePageTimer />

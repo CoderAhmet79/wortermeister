@@ -1,29 +1,10 @@
-const mongoose = require('mongoose')
-const { ObjectId } = require("mongodb");
+// models/Phrase.js
+const mongoose = require("mongoose");
 
-const phraseSchema = new mongoose.Schema(
-    {
-       
-        phraseWord: {
-            type: String,
-            required: true,
-        },
-        phrasePhrase: {
-            type: String,                     
-        },
-        phraseLevel: {
-            type: String,
-        },
-        phraseSource: {
-            type: String,
-        },
-      
-        processTime: {type: Date}
+const phraseSchema = new mongoose.Schema({
+  phraseDeutsch: { type: String, required: true },
+  phraseTurkish: { type: String, required: true },
+  level: { type: String, required: true }
+});
 
-    }
-)
-
-
-const worterPhrase = mongoose.model('phrases', phraseSchema);
-
-module.exports = worterPhrase;
+module.exports = mongoose.model("phrases", phraseSchema);
