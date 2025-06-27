@@ -2,9 +2,6 @@ const express = require("express")
 const router = express.Router()
 const worterbuch = require('../models/wordModel');
 const worterPhrase = require('../models/phraseModel');
-const Visitor = require('../models/Visitor');
-
-
 
 router.get('/', async (req, res) => {
   try {
@@ -61,29 +58,6 @@ router.get('/newest', async (req, res) => {
   }
 })
 
-
-// router.get('/phrases', async (req, res) => {
-//   try {
-//       const agg = [
-//           {
-//               '$group': {
-//                   '_id': '$phraseWord',
-//                   'phrases': {
-//                       '$addToSet': '$phrasePhrase'
-//                   },
-//               }
-//           }, { $sample: { size: 150 } } // Fetch 150 random records
-//                     ];
-
-//       const words = await worterPhrase.aggregate(agg) //Last saved 150 records
-//       res.status(200).json(words);
-
-//   } catch (error) {
-//       console.error('Error fetching users:', error);
-//       res.status(500).send('Internal server error');
-//   }
-
-// })
 
 router.get('/phrases', async (req, res) => {
   try {
@@ -145,6 +119,37 @@ router.post("/addphrase", async (req, res) => {
     res.status(500).json({ message: "Veri eklenirken hata oluştu", error });
   }
 });
+
+router.post('/wordexists', async (req, res) => {
+    const { word } = req.body;
+
+    try {
+        const foundWord = await worterbuch.findOne({ word });
+
+        if (foundWord) {
+            return res.json({ exists: true, message: `${word} already exists in the database.` });
+        } else {
+            return res.json({ exists: false, message: `${word} does not exist in the database.` });
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: 'Server error' });
+    }
+});
+  
+
+router.post("/tracks", async (req, res) => {
+    console.log("data: "+req.body)
+    try {
+        console.log("data: "+req.body)
+    //   const visit = new Visit(req.body);
+    //   await visit.save();
+    //   res.status(201).send("Time tracked successfully!");
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  });
+
 
 router.post('/wordexists', async (req, res) => {
     const { word } = req.body;
