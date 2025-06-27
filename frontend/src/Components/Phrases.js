@@ -66,12 +66,13 @@ const handleSubmit = async (event) => {
 };
 
 
-  useEffect(()=> {
-    window.addEventListener("keydown", checkKey, false);
-    return () => {
-      window.removeEventListener("keydown", checkKey, false);
-    };
-  }, [] )
+ useEffect(() => {
+  window.addEventListener("keydown", checkKey, false);
+  return () => {
+    window.removeEventListener("keydown", checkKey, false);
+  };
+}, []);
+
 
   if (loading) {
  times    //return <Loading/>; // Render a loading indicator while fetching data
