@@ -1,7 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from 'axios'
-import Loading from '../Utils/Loading';
 
 const Phrases = () => {
   const [phrase, setPhrase] = useState([{}])
@@ -73,10 +72,6 @@ const handleSubmit = async (event) => {
   };
 }, []);
 
-
-  if (loading) {
- times    //return <Loading/>; // Render a loading indicator while fetching data
-} 
 
   return (
     <div className='w-2/4 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140'>
