@@ -1,7 +1,6 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from 'axios'
-import Loading from '../Utils/Loading';
 
 const Phrases = () => {
   const [phrase, setPhrase] = useState([{}])
@@ -74,12 +73,8 @@ const handleSubmit = async (event) => {
 }, []);
 
 
-  if (loading) {
- times    //return <Loading/>; // Render a loading indicator while fetching data
-} 
-
   return (
-    <div className='w-2/4 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140'>
+    <div className='w-2/4 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140 min-w-[400px]'>
       
       <div className= {`h-140 w-full gap-2 border border-solid border-y-slate-400 col-span-2 rounded-xl p-2`}> 
         <div className='flex flex-col border-b-2 h-12 justify-evenly items-center align-middle'>
