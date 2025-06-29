@@ -3,78 +3,73 @@ import { useEffect, useState } from 'react';
 import axios from 'axios'
 
 const Phrases = () => {
-  const [phrase, setPhrase] = useState([{}])
-  const [indice, setIndice] = useState(0)
+  const [phrase, setPhrase] = useState([{}]);
+  const [indice, setIndice] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [times, setTimes]= useState()
+  const [times, setTimes] = useState();
 
-const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault(); // Sayfanın yenilenmesini engeller
-     setIndice(0)
+    setIndice(0);
     // Formdan değerleri al
     const level = document.getElementById("level").value;
     const timesValue = document.getElementById("times").value;
-    setTimes(timesValue)
+    setTimes(timesValue);
 
     try {
       const response = await axios.get(`${process.env.REACT_APP_URI}phrases`, {
         params: {
           level: level,
-          limit: timesValue
-        }
+          limit: timesValue,
+        },
       });
 
       // Gelen veriyi state'e ata veya başka bir işlem yap
       setPhrase(response.data);
-      console.log(response.data)
     } catch (error) {
       console.error("Veri getirme hatası:", error);
     }
   };
- 
- 
-  const nextWord = ()=> {
-   
-    setIndice(prev =>  {
-      if (prev > times-2) {
-        return 0; // Decrement if greater than 0
-    } else {
-        return prev + 1; // Set to 149 if it would go below 0
-    }
-    } )
-   
-  }
 
-  const prevWord = ()=> {
-    setIndice(prev =>  {
+  const nextWord = () => {
+    setIndice((prev) => {
+      if (prev > times - 2) {
+        return 0; // Decrement if greater than 0
+      } else {
+        return prev + 1; // if it would go below 0
+      }
+    });
+  };
+
+  const prevWord = () => {
+    setIndice((prev) => {
       if (prev > 0) {
         return prev - 1; // Decrement if greater than 0
-    } else {
-        return times-1; // Set to 149 if it would go below 0
-    }
-    } )
-   
-  }
+      } else {
+        return times - 1; // Set to 149 if it would go below 0
+      }
+    });
+  };
 
   const checkKey = (e) => {
-    if (e.keyCode === 39) { // Right arrow key
-        nextWord();
-    } else if (e.keyCode === 37) { // Left arrow key
-        prevWord();
+    if (e.keyCode === 39) {
+      // Right arrow key
+      nextWord();
+    } else if (e.keyCode === 37) {
+      // Left arrow key
+      prevWord();
     }
-};
-
-
- useEffect(() => {
-  window.addEventListener("keydown", checkKey, false);
-  return () => {
-    window.removeEventListener("keydown", checkKey, false);
   };
-}, []);
 
+  useEffect(() => {
+    window.addEventListener("keydown", checkKey, false);
+    return () => {
+      window.removeEventListener("keydown", checkKey, false);
+    };
+  }, []);
 
   return (
-    <div className='w-2/4 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140 min-w-[400px]'>
+    <div className='w-2/4 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140'>
       
       <div className= {`h-140 w-full gap-2 border border-solid border-y-slate-400 col-span-2 rounded-xl p-2`}> 
         <div className='flex flex-col border-b-2 h-12 justify-evenly items-center align-middle'>
@@ -110,14 +105,27 @@ const handleSubmit = async (event) => {
              <li className='text-center'>{indice+1}</li>
            </ul>
         </div>
-
       </div>
-      <div className='row-start-2 h-fit mt-44 mr-8'><button onClick={()=> prevWord()} className='text-2xl p-5 hover:border-none float-right border-slate-950 text-center bg-sky-400 shadow-2xl rounded text-zinc-50 from-neutral-900 font-mono  hover:bg-blue-700' > Prev </button></div>
-      <div className='row-start-2 h-fit mt-44 ml-8'><button onClick={()=> nextWord()} className='text-2xl p-5 hover:border-none border-slate-950 text-center bg-sky-400 shadow-2xl rounded text-zinc-50 from-neutral-900 font-mono  hover:bg-blue-700' > Next</button></div>
+      <div className="row-start-2 h-fit mt-44 mr-8">
+        <button
+          onClick={() => prevWord()}
+          className="text-2xl p-5 hover:border-none float-right border-slate-950 text-center bg-sky-400 shadow-2xl rounded text-zinc-50 from-neutral-900 font-mono  hover:bg-blue-700"
+        >
+          {" "}
+          Prev{" "}
+        </button>
+      </div>
+      <div className="row-start-2 h-fit mt-44 ml-8">
+        <button
+          onClick={() => nextWord()}
+          className="text-2xl p-5 hover:border-none border-slate-950 text-center bg-sky-400 shadow-2xl rounded text-zinc-50 from-neutral-900 font-mono  hover:bg-blue-700"
+        >
+          {" "}
+          Next
+        </button>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-
-
-export default Phrases
+export default Phrases;

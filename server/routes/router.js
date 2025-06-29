@@ -63,7 +63,7 @@ router.get('/phrases', async (req, res) => {
   try {
     const level = req.query.level;
     const limit = parseInt(req.query.limit);
-console.log(level, limit)
+
     const agg = [
       {
         $match: { level: level } // Belirtilen seviyeye göre filtrele
@@ -170,7 +170,7 @@ router.post('/wordexists', async (req, res) => {
   
 
 router.post("/tracks", async (req, res) => {
-    console.log("data: "+req.body)
+    
     try {
         console.log("data: "+req.body)
     //   const visit = new Visit(req.body);
@@ -244,5 +244,49 @@ router.post('/visitors', async (req, res) => {
     res.status(500).json({ error: 'Failed to log visitor' });
   }
 });
+
+router.post('/remove-duplicates', async (req, res) => {
+  try {
+    // Group by 'phraseDeutsch', find those with more than 1 duplicate
+    const duplicates = await worterPhrase.aggregate([
+      {
+        $group: {
+          _id: "$phraseDeutsch",
+          ids: { $addToSet: "$_id" },
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $match: {
+          count: { $gt: 1 }
+        }
+      }
+    ]);
+
+    let toDelete = [];
+
+    // For each duplicate group, keep one ID, delete the rest
+    duplicates.forEach(group => {
+      group.ids.shift(); // Keep the first one
+      toDelete.push(...group.ids); // Collect rest for deletion
+    });
+
+    // Delete the duplicates
+    const result = await worterPhrase.deleteMany({
+      _id: { $in: toDelete }
+    });
+
+    res.json({
+      message: 'Duplicates removed successfully',
+      deletedCount: result.deletedCount
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 
 module.exports = router
