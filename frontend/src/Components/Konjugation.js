@@ -34,11 +34,12 @@ const Konjugation = () => {
         <form onSubmit={bringVerbenConjugation} className='flex flex-row w-full'>
     
             <input type='text'
-            className='h-10 rounded pl-1 font-serif bg-gray-200'
+            className='h-10 rounded pl-2 font-serif bg-gray-200'
             autoComplete='On'
             onChange={handleChange}
             value={dasVerb}
             title="Please enter letters only."
+            placeholder='Enter a verb infinitive form'
             pattern="[A-Za-zäöüßÄÖÜ]*"
             required
           /> 
