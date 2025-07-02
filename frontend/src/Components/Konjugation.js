@@ -28,13 +28,13 @@ const Konjugation = () => {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center w-full p-4 border-1  rounded '>
+    <div className='flex flex-col justify-center items-center w-full p-4 border-1 rounded shadow-lg'>
 
-      <div className='border-1 rounded border-slate-700 mb-4'>
+      <div className='border-1 rounded border-slate-700 mb-4 shadow-lg'>
         <form onSubmit={bringVerbenConjugation} className='flex flex-row w-full'>
     
             <input type='text'
-            className='h-10 rounded pl-2 font-serif bg-gray-200'
+            className='h-10 rounded pl-2 font-serif bg-gray-200 max-[400px]:w-18'
             autoComplete='On'
             onChange={handleChange}
             value={dasVerb}
