@@ -2,11 +2,16 @@ import React from "react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+
+
+
 const Phrases = () => {
   const [phrase, setPhrase] = useState([{}]);
   const [indice, setIndice] = useState(0);
   const [loading, setLoading] = useState(true);
   const [times, setTimes] = useState();
+  const [textcolor, setTextcolor] = useState('text-black');
+  const [hidebutton, setHidebutton] = useState('Hide the Turkish Meaning');
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // Sayfanın yenilenmesini engeller
@@ -59,6 +64,11 @@ const Phrases = () => {
       // Left arrow key
       prevWord();
     }
+  };
+
+  const handleTurkishMeaning = () => {
+    setTextcolor(textcolor === "text-black" ? "text-white" : "text-black");
+    setHidebutton(hidebutton === "Hide the Turkish Meaning" ? "Show the Turkish Meaning" : "Hide the Turkish Meaning");
   };
 
   useEffect(() => {
@@ -120,10 +130,15 @@ const Phrases = () => {
         <div className="w-full h-full flex justify-center items-start pt-4 text-2xl font-serif">
           <ul>
             <li className="text-center" key={phrase?._id}>
-              <strong>{phrase[indice]?.phraseDeutsch}</strong>
+              <strong> {phrase[indice]?.phraseDeutsch}</strong>
             </li>
-            <li className="text-center mt-4">
+            <li className={`text-center mt-4 ${textcolor}`} >
               {phrase[indice]?.phraseTurkish}
+            </li>
+             <li className="text-center mt-4"  >
+              <button onClick={() => handleTurkishMeaning()}
+                className="text-lg p-2 bg-sky-400 text-zinc-50 rounded hover:bg-blue-700"
+                > {hidebutton}</button>
             </li>
             <li className="text-lg text-red-500 text-center ">
               {phrase[indice]?.level}
