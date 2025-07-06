@@ -67,7 +67,7 @@ const Phrases = () => {
   };
 
   const handleTurkishMeaning = () => {
-    setTextcolor(textcolor === "text-black" ? "text-white" : "text-black");
+    setTextcolor(textcolor === "text-black" ? "text-slate-100" : "text-black");
     setHidebutton(hidebutton === "Hide the Turkish Meaning" ? "Show the Turkish Meaning" : "Hide the Turkish Meaning");
   };
 
