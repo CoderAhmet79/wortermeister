@@ -29,7 +29,7 @@ const Stats = () => {
   }
 
   return (
-    <div className="w-2/4 place-self-center h-140 font-serif border-2 min-w-80 rounded max-md:w-3/4 border-zinc-300 p-8 max-sm:w-full shadow-lg">
+    <div className="w-2/4 place-self-center h-140 font-serif min-w-80 rounded max-md:w-3/4 p-8 max-sm:w-full shadow-lg bg-slate-100">
       <div className="grid grid-cols-2 grid-rows-6 gap-4 place-content-center">
         <div className=" text-right h-10 content-center text-xl max-md:text-xl max-sm:text-base">
           Total Word Count:

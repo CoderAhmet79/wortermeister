@@ -7,7 +7,7 @@ const DeutschComp = ({mywords, phrases, bgcolor}) => {
       
    
   return (
-    <div className="relative h-112 overflow-hidden group  min-w-[400px] grid place-items-center">
+    <div className={`relative h-112 overflow-hidden group  min-w-[400px] grid place-items-center ${bgcolor}`}>
     <img src={mywords?.photolink} alt="Image" className="w-auto h-96 rounded-xl
      object-fill place-self-center transition-opacity duration-300 group-hover:opacity-0 "
      />

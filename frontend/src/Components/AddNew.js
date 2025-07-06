@@ -207,9 +207,9 @@ catch (error) {
   };
 
   return (
-    <div className='w-3/4 flex justify-center place-self-center min-h-96 flex-row max-md:flex-col max-sm:w-100 max-sm:border-none'>
-      <div className='w-2/4 flex flex-col items-center p-6 border-2 rounded-lg border-red-200 mr-2 min-w-96'>
-        <div className='font-serif'><b>Özel karakterler: </b></div>
+    <div className='w-3/4 flex justify-center place-self-center min-h-96 rounded-md flex-row max-md:flex-col max-sm:w-100 max-sm:border-none bg-slate-100'>
+      <div className='w-2/4 flex flex-col items-center p-6 border-2 rounded-lg mr-2 min-w-96'>
+        <div className='font-serif'><b>Özel karakterler: </b></div> 
         <div className='font-serif'>      
           
           <button className="border-2 mr-1 min-w-10 min-h-10 bg-slate-700 text-slate-50 rounded text-xl" onClick={() => addSpecialChars('ğ')}>ğ</button>

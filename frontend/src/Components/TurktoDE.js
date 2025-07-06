@@ -93,7 +93,7 @@ const TurktoDE = () => {
 } 
 
 return (
-  <div className='w-2/4 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140 shadow-md min-w-[400px]'>
+  <div className='w-2/4 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140 shadow-md min-w-[400px] bg-slate-100 rounded-md'>
     
     <div className= {`h-140 w-full grid justify-center col-span-2 min-w-[400px] rounded ${bgcolor} `}> 
       <div className="relative h-112 overflow-hidden group  min-w-[400px] grid place-items-center">

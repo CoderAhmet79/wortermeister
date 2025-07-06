@@ -79,8 +79,8 @@ const Phrases = () => {
   }, []);
 
   return (
-    <div className="w-3/5 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140 min-w-[402px]">
-      <div className="flex flex-col justify-between h-140 w-full gap-1 border col-span-2 rounded-xl pt-2 min-[400px] shadow-lg">
+    <div className="w-3/5 place-self-center grid grid-cols-2 grid-rows-2 gap-1 h-140 min-w-[402px] bg-slate-100 rounded-md">
+      <div className="flex flex-col justify-between h-140 w-full gap-1 border col-span-2 rounded-md pt-2 min-[400px] shadow-lg">
         <div
           className="flex flex-col border-b-2 h-12 items-center align-middle
         min-w-[396px] min-[500px]:gap-4 w-full "

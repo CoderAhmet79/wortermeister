@@ -28,7 +28,7 @@ const Konjugation = () => {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center w-full p-4 border-1 rounded shadow-lg'>
+    <div className='flex flex-col justify-center items-center w-full p-4 border-1 rounded-md shadow-lg bg-slate-100'>
 
       <div className='border-1 rounded border-slate-700 mb-4 shadow-lg'>
         <form onSubmit={bringVerbenConjugation} className='flex flex-row w-full'>
